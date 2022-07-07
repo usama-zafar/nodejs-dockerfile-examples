@@ -26,3 +26,6 @@ EXPOSE 3000
 CMD npm start
 
 #Build this image by running: docker image build -t name/name:v1 .
+#The build is going to run through each instruction in order. It's going to start with the FROM, and then it's going to end with CMD. 
+#Each instruction creates a layer, and each layer creates a container.
+#All of these containers are just the intermediate steps till we get to the final results. And by default, all these additional containers will be deleted.
