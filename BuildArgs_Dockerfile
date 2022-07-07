@@ -1,0 +1,22 @@
+
+FROM node
+
+# Set the default Source Directory as /var/node if no BUILD ARG is supplied when creating an image
+ARG SRC_DIR=/var/node
+
+# Create a directory based off the SRC_DIR variable
+RUN mkdir -p $SRC_DIR
+
+# Add all the source data to whatever path is supplied at SRC_DIR
+ADD src/ $SRC_DIR
+
+# Set the WORKDIR to whatever path is supplied at SRC_DIR
+WORKDIR $SRC_DIR
+
+RUN npm install
+EXPOSE 3000
+CMD npm start
+
+# Build Image # 1: docker image build -t name/name:v1 --build-arg SRC_DIR=/var/code .
+# Create container: docker container run -d --name weather-app3 -p 8085:3000 name/name:v1
+# Repo: wget https://github.com/linuxacademy/content-weather-app/archive/refs/heads/master.zip
