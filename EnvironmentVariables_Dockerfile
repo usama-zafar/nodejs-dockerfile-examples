@@ -1,10 +1,10 @@
 
 FROM node
 
-#Use the default environment as development but use whatever is supplied when creating the container
+# Use the default environment as development but use whatever is supplied when creating the container
 ENV NODE_ENV="development"
 
-#Use the default PORT as 3000 but use whatever is supplied when creating the container
+# Use the default PORT as 3000 but use whatever is supplied when creating the container
 ENV PORT 3000
 
 RUN mkdir -p /var/node
@@ -12,7 +12,7 @@ ADD src/ /var/node/
 WORKDIR /var/node
 RUN npm install
 
-#Use whatever the port is defined in the the above ENV Variable
+# Use whatever the port is defined in the the above ENV Variable
 EXPOSE $PORT
 
 CMD npm start
