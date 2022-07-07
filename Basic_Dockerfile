@@ -1,0 +1,28 @@
+#Current Directory: /home/master/user/weatherapp/
+#PWD contains src folder and Dockerfile
+
+#Sets a base image
+FROM node
+
+#Label for the image
+LABEL org.label-schema.version=v1.1
+
+#Create a new directory
+RUN mkdir -p /var/node
+
+#Copy all data from /src to the the container that will be made from this image at /var/node
+ADD src/ /var/node/
+
+#All RUN, COPY, CMD, ENTRYPOINT and ADD commands will be executed in WORKDIR path
+WORKDIR /var/node
+
+#Install all packages and their dependencies
+RUN npm install
+
+#Container shall listen on this port (can add more ports by delimiting spaces)
+EXPOSE 3000
+
+#This is the default command when the container starts. A Dockerfile can only contain one CMD command
+CMD npm start
+
+#Build this image by running: docker image build -t name/name:v1 .
