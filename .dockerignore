@@ -1,0 +1,23 @@
+# Create a new .dockerignore file
+
+# Ignore these files
+*/*.md
+*/.git
+src/docs/
+*/tests/
+
+
+# Create a new Dockerfile:
+FROM node
+ENV NODE_ENV="production"
+ENV PORT 3000
+RUN mkdir -p /var/node
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+EXPOSE $PORT
+ENTRYPOINT ["./bin/www"]
+
+# Build the image:docker image build -t linuxacademy/weather-app:v5 .
+# Build the container: docker container run -d --name weather-app-ignore app/weather-app:v5
+# Test the changes: docker container exec weather-app-ignore ls -la /var/node
