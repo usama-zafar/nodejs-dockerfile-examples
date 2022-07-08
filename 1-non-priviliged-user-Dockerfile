@@ -1,0 +1,12 @@
+FROM centos:latest
+RUN useradd -ms /bin/bash cloud_user
+USER cloud_user
+
+
+# Build image: docker image build -t centos7/nonroot:v1 .
+# Create container and connect to terminal: docker container run -it --name test-build centos7/nonroot:v1 /bin/bash
+
+# Connecting as a privileged user:
+# docker container start test-build (since container will be stopped after exiting)
+# docker container exec -u 0 -it test-build /bin/bash (Root is user 0, -u is to specificy root)
+
