@@ -1,0 +1,7 @@
+FROM nginx:latest
+VOLUME ["/usr/share/nginx/html/"]
+
+# Build a new image: docker image build -t volumetest/nginx:v1 .
+# Create the container: docker container run -d --name nginx-volume volumetest/nginx:v1
+# Inspect the volume: docker container inspect nginx-volume
+
