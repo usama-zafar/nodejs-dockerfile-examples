@@ -1,0 +1,19 @@
+FROM node AS build
+RUN mkdir -p /var/node/
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+
+FROM node:alpine
+ARG VERSION=V1.1
+ENV NODE_ENV="production"
+COPY --from=build /var/node /var/node
+WORKDIR /var/node
+EXPOSE 3000
+ENTRYPOINT ["./bin/www"]
+
+
+# Build the image: docker image build -t app/weather-app:multi-stage-build --rm --build-arg VERSION=1.5 .
+# Build the container: docker container run -d --name multi-stage-build -p 8087:3000 app/weather-app:multi-stage-build
+
+
