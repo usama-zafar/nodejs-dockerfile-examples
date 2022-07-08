@@ -1,0 +1,19 @@
+# This will throw error as cloud_user is selected here and then we're creating a directory in /etc which is only for root user
+# USER command sets the user as cloud_user
+
+FROM centos:latest
+RUN mkdir -p ~/new-dir1
+RUN useradd -ms /bin/bash cloud_user
+USER cloud_user
+RUN mkdir -p ~/new-dir2
+RUN mkdir -p /etc/myconf
+RUN echo "Some config data" >> /etc/myconf/my.conf
+
+# This will work as we are running the commands before setting the USER as cloud_user
+FROM centos:latest
+RUN mkdir -p ~/new-dir1
+RUN useradd -ms /bin/bash cloud_user
+RUN mkdir -p ~/new-dir2
+RUN mkdir -p /etc/myconf
+USER cloud_user
+RUN echo "Some config data" >> /etc/myconf/my.conf
